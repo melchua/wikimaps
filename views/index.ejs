@@ -2,16 +2,42 @@
 <html lang="en">
   <head>
     <title>Home Page</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/loadmap.js"></script>
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <h1>City Title Dummy Text Here</h1>
+
+    <div id="map"></div>
+
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVxbpfmC6j5_01ie6kzGZb-znmDRSDf4Y&callback=initMap">
+    </script>
+
   </body>
 </html>

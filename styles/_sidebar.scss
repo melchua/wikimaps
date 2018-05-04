@@ -4,7 +4,7 @@ body h1 {
   position: absolute;
 }
 
-/* The side navigation menu */
+/*/ The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
@@ -50,6 +50,7 @@ body h1 {
     right: 15px;
     font-size: 36px;
     margin-left: 50px;
+    z-index: 2;
 }
 
 

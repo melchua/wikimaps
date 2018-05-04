@@ -6,7 +6,7 @@ $(() => {
   };
 
   function createProfile() {
-    var $profile = $('<div class="name">' + profileObj.name + '</div>');
+    var $profile = $('<div class="name"><h2>' + profileObj.name + '</h2></div>');
     $profile.append('<div class="email">' + profileObj.email + ' </div>');
     $profile.append('<input type="submit" value="Logout">');
     return $profile;

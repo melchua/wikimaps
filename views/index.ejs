@@ -25,13 +25,18 @@
        * element that contains the map. */
       #map {
         height: 100%;
-        z-index: -1;
+        z-index: 0;
+        position: fixed;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+      }
+
+      .sidehead {
+        font-size: 30px;
       }
     </style>
 
@@ -46,28 +51,36 @@
  -->
     <div id="mySidenav" class="sidenav">
       <span id="closebtn">&times;</span>
-      <a href="#">Profile</a>
+      <a href="#" style="font-size: 30px">Profile</a>
 
       <section class="profile"></section>
 
 
-      <a href="#">Favorites</a>
-      <a href="#">Contributed</a>
-      <a href="#">Maps</a>
+      <a href="#" style="font-size: 30px">Favorites</a>
+
+<!-- test tempatle for favorites -->
+      <section class="favorites_list">
+        <ol>
+          <li class="favorite">
+            Celebrity sightings
+          </li>
+          <li class="favorite">
+            Must-see dog poop sights
+          </li>
+          <li class="favorite">
+            Hobos sleep here!!
+          </li>
+        </ol>
+      </section>
+
+
+      <a href="#" style="font-size: 30px">Contributed</a>
+      <a href="#" style="font-size: 30px">Maps</a>
     </div>
 
 <!-- Use any element to open the sidenav -->
     <i class="fas fa-bars" id="openbtn"></i>
 
-
-
-    <div id="profile">
-      <h1>Profile</h1>
-        <p class="name">Name</p>
-        <p class="email">Email</p>
-        <input type="submit" value="Logout">
-
-    </div>
 
   <!--   <h1>City Title Dummy Text Here</h1> -->
 

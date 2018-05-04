@@ -9,3 +9,39 @@ $(() => {
   });
 });
 
+
+//$( "#target" ).toggle(function() {
+//  alert( "First handler for .toggle() called." );
+//}, function() {
+//  alert( "Second handler for .toggle() called." );
+//});
+$(document).ready(function(){
+
+  $(".profile").hide();
+  $(".favourites").hide();
+  $(".contributed").hide();
+  $(".maps").hide();
+
+
+
+  $('.profileButton').on('click', function(){
+    $('.profile').toggle();
+  });
+
+  $('.favouritesButton').on('click', function(){
+    $('.favourites').toggle();
+  });
+
+  $('.contributedButton').on('click', function(){
+    $('.contributed').toggle();
+  });
+
+
+
+  $('.mapsButton').on('click', function(){
+    $('.maps').toggle();
+  });
+
+
+
+});

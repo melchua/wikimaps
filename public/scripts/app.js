@@ -29,7 +29,7 @@ $(document).ready(function(){
   });
 
   $('.favouritesButton').on('click', function(){
-    $('.favourites').toggle();
+    $('.favorites_list').toggle();
   });
 
   $('.contributedButton').on('click', function(){

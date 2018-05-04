@@ -17,6 +17,7 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/scripts/loadmap.js"></script>
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
+    <script type="text/javascript" src="/scripts/profile.js"></script>
 
 
     <style>
@@ -24,13 +25,18 @@
        * element that contains the map. */
       #map {
         height: 100%;
-        z-index: -1;
+        z-index: 0;
+        position: fixed;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+      }
+
+      .sidehead {
+        font-size: 30px;
       }
     </style>
 
@@ -43,42 +49,42 @@
     </nav>
 
  -->
-    <div id="mySidenav" class="sidenav">
-      <span id="closebtn">&times;</span>
-
-      <a class="profileButton" href="#">Profile</a>
-        <section class="profile">
-          <div class="name">Name</div>
-          <div class="email">Email</div>
-          <input type="submit" value="Logout">
-        </section>
-
-      <a class="favouritesButton" href="#">Favorites</a>
-        <section class=favourites >
-          <div>awefawefawef</div>
-        </section>
-
-      <a class="contributedButton" href="#">Contributed</a>
-        <section class="contributed">
-        </section>
-
-      <a class="mapsButton" href="#">Maps</a>
-        <section class="maps">
-        </section>
-    </div>
-
 <!-- Use any element to open the sidenav -->
     <i class="fas fa-bars" id="openbtn"></i>
 
+    <div id="mySidenav" class="sidenav">
+      <span id="closebtn">&times;</span>
 
+      <a class="profileButton" href="#" style="font-size: 30px">Profile</a>
+      <section class="profile">
+      </section>
 
-  <!--   <h1>City Title Dummy Text Here</h1> -->
+      <a class="favouritesButton" href="#" style="font-size: 30px">Favorites</a>
+      <section class="favorites_list">
+        <ol>
+          <li class="favorite">
+            Celebrity sightings
+          </li>
+          <li class="favorite">
+            Must-see dog poop sights
+          </li>
+          <li class="favorite">
+            Hobos sleep here!!
+          </li>
+        </ol>
+      </section>
+
+      <a class="contributedButton" href="#" style="font-size: 30px">Contributed</a>
+      <section class="contributed_list">
+      </section>
+
+      <a class="mapsButton" href="#">Maps</a>
+      <section class="maps_list">
+      </section>
+    </div>
 
     <div id="map">
     </div>
-
-
-
 
 
     <script async defer

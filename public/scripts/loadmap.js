@@ -34,7 +34,7 @@ function initMap() {
         infoWindow.open(map);
       }
 
-  })
+  });
 }
 
 // $(() => {

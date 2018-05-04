@@ -9,16 +9,22 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
+
+
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/scripts/loadmap.js"></script>
+    <script type="text/javascript" src="/scripts/sidebar.js"></script>
+
 
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
         height: 100%;
-        z-index: 1;
+        z-index: -1;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -31,11 +37,22 @@
   </head>
 
   <body>
-    <nav id="nav_bar">
+<!--     <nav id="nav_bar">
       <img class="logo" src="/images/Logo.png">
       <span class="list"> :Placeholder - LIST TITLE HERE</span>
     </nav>
-  <!--   <h1>City Title Dummy Text Here</h1> -->
+ -->
+    <div id="mySidenav" class="sidenav">
+      <span id="closebtn">&times;</span>
+      <a href="#">Profile</a>
+      <a href="#">Favorites</a>
+      <a href="#">Contributed</a>
+      <a href="#">Maps</a>
+    </div>
+
+<!-- Use any element to open the sidenav -->
+    <i class="fas fa-bars" id="openbtn"></i>
+
     <div id="map">
     </div>
 

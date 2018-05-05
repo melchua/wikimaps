@@ -1,3 +1,5 @@
+sessionStorage.setItem('createFlag', 'inactive');
+
 $(() => {
   $.ajax({
     method: "GET",
@@ -16,9 +18,11 @@ $(() => {
 //  alert( "Second handler for .toggle() called." );
 //});
 $(document).ready(function(){
+  if (!window.cheat) {window.cheat = {};}
+
 
   $(".profile").hide();
-  $(".favourites").hide();
+  $(".favorites_list").hide();
   $(".contributed").hide();
   $(".maps").hide();
 
@@ -42,6 +46,10 @@ $(document).ready(function(){
     $('.maps').toggle();
   });
 
-
-
+  $(".createButton").click(function(){
+    window.cheat.createFlag = !window.cheat.createFlag;
+    // sessionStorage.getItem('createFlag') === 'active' ?
+    //   sessionStorage.setItem('createFlag', 'inactive') :
+    //   sessionStorage.setItem('createFlag', 'active');
+  });
 });

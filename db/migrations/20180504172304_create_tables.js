@@ -4,8 +4,8 @@ exports.up = function(knex, Promise) {
         knex.schema.createTable('maps', function (table) {
       table.increments('id');
       table.string('name');
-      table.decimal('latitude',8,6);
-      table.decimal('longitude',8,6);
+      table.float('latitude',10,6);
+      table.float('longitude',10,6);
       table.integer('zoom');
       table.timestamps();
       table.integer('user_id').notNull().references('users.id')
@@ -13,8 +13,8 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('places', function (table) {
       table.increments('id');
       table.string('name');
-      table.decimal('latitude',8,6);
-      table.decimal('longitude',8,6);
+      table.float('latitude',10,6);
+      table.float('longitude',10,6);
       table.string('image');
       table.string('description');
     }),

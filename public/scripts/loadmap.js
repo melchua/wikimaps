@@ -1,5 +1,14 @@
 var markerForNew = null;
 
+function saveData(marker) {
+  var name = escape(document.getElementById('name').value);
+  var description = escape(document.getElementById('description').value);
+  var img = document.getElementById('image').value;
+  var latlng = marker.getPosition();
+
+  // console.log(name,description,img,latlng);
+}
+
 function getAndRenderMarkers(mapId, map) {
   $.ajax({
     url: "some shit",
@@ -157,14 +166,25 @@ function initMap() {
 
 
 
+    // TODO
+    // 1. add marker *
+    // 2. marker should have info window attached to save data *
+    // 3. add save button *
+    // 4. save to array of markers of the map and re-render the markers
+    // 5. repeat ability to add marker
+
+
+
+// Tampered code  - Mel
+
     //User can add marker to a map by clicking on the map. The next point clicked will remove the first point clicked
     google.maps.event.addListener(map, 'click', function(event) {
        addMarker(event.latLng, map);
     });
     function addMarker(location, map) {
-      var lat = location.lat();
-      var lng = location.lng();
-      location = {lat:lat, lng:lng};
+      // var lat = location.lat();
+      // var lng = location.lng();
+      // location = {lat:lat, lng:lng};
       if (!window.cheat.createFlag) return; // only allow marker creation/movement when in "create mode"
       if(markerForNew) {
           markerForNew.setPosition(location);
@@ -175,8 +195,57 @@ function initMap() {
           map: map,
           draggable: true
         });
+
+        let infoContent = `
+        <div class='savedMarkerInfo'>
+          <table>
+            <tr><td>Name:</td> <td><input type='text' id='name' placeholder='Place name'/></td> </tr>
+            <tr><td>Description:</td> <td><input type='text' id='description' placeholder='Enter desc'/></td> </tr>
+            <tr><td>Image:</td> <td><input type='text' id='image' placeholder='http://image.jpg'/></td> </tr>
+            <tr><td></td><td><input type='button' value='Save' onclick='saveData(markerForNew)'/></td></tr>
+          </table>
+        </div>`;
+        //        <tr><td>Name:</td> <td><input type='text' class='name' value='${markerData.name}'/></td> </tr>
+        //        <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>
+
+
+        let infowindow = new google.maps.InfoWindow({
+          content: infoContent
+        });
+
+        google.maps.event.addListener(markerForNew, 'click', function() {
+          infowindow.open(map, markerForNew);
+        });
+
+
       }
+
     }
+
+
+
+
+// Original code
+    //User can add marker to a map by clicking on the map. The next point clicked will remove the first point clicked
+    // google.maps.event.addListener(map, 'click', function(event) {
+    //    addMarker(event.latLng, map);
+    // });
+    // function addMarker(location, map) {
+    //   var lat = location.lat();
+    //   var lng = location.lng();
+    //   location = {lat:lat, lng:lng};
+    //   if (!window.cheat.createFlag) return; // only allow marker creation/movement when in "create mode"
+    //   if(markerForNew) {
+    //       markerForNew.setPosition(location);
+    //   } else {
+    //     markerForNew = new google.maps.Marker({
+    //       position: location,
+    //       flat: false,
+    //       map: map,
+    //       draggable: true
+    //     });
+    //   }
+    // }
 
 
     window.map = map;     // totally unacceptable debugging hack, fixme

@@ -35,10 +35,10 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
-
+const mapActions = require('./lib/services/map_actions')(knex);
 // Mount all resource routes
 app.use("/users", usersRoutes(knex));
-
+app.use('/maps', require('./routes/maps')(mapActions))
 // Home page
 app.get("/", (req, res) => {
   res.render("index");

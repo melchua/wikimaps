@@ -3,11 +3,15 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (knex) => {
+module.exports = (mapActions) => {
 
   router.get("/", (req, res) => {
-    res.render("index");
+    mapActions.getMaps()
+      .then((maps) => {
+        res.json(maps);
+
+      });
   });
 
   return router;
-}
+};

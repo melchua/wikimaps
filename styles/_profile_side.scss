@@ -1,6 +1,6 @@
 .profile {
   color: #818181;
-  padding: 10px 10px 10px 32px;
+  padding: 10px 0px 10px 28px;
   border-bottom: solid 1px;
 }
 
@@ -16,4 +16,17 @@ h2 {
   margin-bottom: 1em;
 }
 
+.logoutButton {
+ color: #818181;
+ background-color: black;
 
+ opacity: 0.87;
+ border-width: 0.1em;
+ border-radius: 0.5em;
+ padding: 0.5em 1em 0.5em 1em;
+
+}
+
+.logoutButton:hover{
+  color: white;
+}

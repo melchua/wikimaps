@@ -8,7 +8,7 @@ $(() => {
   function createProfile() {
     var $profile = $('<div class="name"><h2>' + profileObj.name + '</h2></div>');
     $profile.append('<div class="email">' + profileObj.email + ' </div>');
-    $profile.append('<input type="submit" value="Logout">');
+    $profile.append('<input class="logoutButton" type="submit" value="Logout">');
     return $profile;
   }
 
@@ -20,12 +20,5 @@ $(() => {
 
   renderProfile();
 });
-
-
-
- // <section class="profile">
-
- //   </section>
-
 
 

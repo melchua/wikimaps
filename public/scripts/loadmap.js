@@ -1,83 +1,133 @@
-var marker = null;
+var markerForNew = null;
+
+function getAndRenderMarkers(mapId, map) {
+  $.ajax({
+    url: "some shit",
+    method: "GET",
+    // data: "maybe some shit?",
+    success: (data) => {
+      // data = JSON.parse(data);
+      renderMarkers(data.markers, map);     // TODO: is "data.markers" correct? what is correct?  who is bear?
+    },
+    error: (jqXHR, textStatus, errorThrown) => {
+      console.log("why why why does this not work?", textStatus);
+    }
+  });
+}
+
+function renderMarkers(markers, map) {
+  for (let marker of markers) {
+    renderSingleRichMarker(marker, map);
+  }
+}
+
+function renderSingleRichMarker(markerData, map) {
+  // put the actual marker on the map
+  // set up infobox
+  // attach infobox to marker's on-click
+  let location = {lat: markerData.lat, lng: markerData.lng};
+  let marker = new google.maps.Marker({
+    position: location,
+    flat: false,
+    map: map,
+    draggable: true     // rilly?
+  });
+
+  let infoContent = `
+    <div class='savedMarkerInfo'>
+      <table>
+        <tr><td>Name:</td> <td>${markerData.name}</td> </tr>
+        <tr><td>Description:</td> <td>${markerData.description}</td> </tr>
+      </table>
+    </div>`;
+    //        <tr><td>Name:</td> <td><input type='text' class='name' value='${markerData.name}'/></td> </tr>
+    //        <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>
+
+
+  let infowindow = new google.maps.InfoWindow({
+    content: infoContent
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map, marker);
+  });
+
+}
 
 function initMap() {
   $(function(){
 
-  //Combined geocaching
-  // function initAutocomplete() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -33.8688, lng: 151.2195},
-        zoom: 13,
-        mapTypeId: 'roadmap'
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 50, lng: -123},
+      zoom: 13,
+      mapTypeId: 'roadmap'
+    });
+
+
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    var markers = [];
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // Clear out the old markers.
+      markers.forEach(function(marker) {
+        marker.setMap(null);
       });
+      markers = [];
 
-      // Create the search box and link it to the UI element.
-      var input = document.getElementById('pac-input');
-      var searchBox = new google.maps.places.SearchBox(input);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-      // Bias the SearchBox results towards current map's viewport.
-      map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
-      });
-
-      var markers = [];
-      // Listen for the event fired when the user selects a prediction and retrieve
-      // more details for that place.
-      searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
-
-        if (places.length == 0) {
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
           return;
         }
+        var icon = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
 
-        // Clear out the old markers.
-        markers.forEach(function(marker) {
-          marker.setMap(null);
-        });
-        markers = [];
+        // Create a marker for each place.
+        markers.push(new google.maps.Marker({
+          map: map,
+          icon: icon,
+          title: place.name,
+          position: place.geometry.location
+        }));
 
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
-          if (!place.geometry) {
-            console.log("Returned place contains no geometry");
-            return;
-          }
-          var icon = {
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-          };
+        console.log(markers);
 
-          // Create a marker for each place.
-          markers.push(new google.maps.Marker({
-            map: map,
-            icon: icon,
-            title: place.name,
-            position: place.geometry.location
-          }));
-
-          if (place.geometry.viewport) {
-            // Only geocodes have viewport.
-            bounds.union(place.geometry.viewport);
-          } else {
-            bounds.extend(place.geometry.location);
-          }
-        });
-        map.fitBounds(bounds);
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
       });
+      map.fitBounds(bounds);
+    });
 
-      //Geolocation section here:
-       // var map, infoWindow;
-            map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 14
-        });
-        infoWindow = new google.maps.InfoWindow;
-      // Try HTML5 geolocation.
+    //Geolocation section here:
+    var infoWindow = new google.maps.InfoWindow;
+    // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
@@ -104,66 +154,78 @@ function initMap() {
       infoWindow.open(map);
     }
 
-    if (!window.cheat) {window.cheat = {};}
-    var map, infoWindow;
-          map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 14
-      });
-      infoWindow = new google.maps.InfoWindow;
 
 
 
-    // if(true || sessionStorage.getItem('createFlag') === 'active'){
-    if(true || window.cheat.createFlag){
-      //User can add marker to a map by clicking on the map. The next point clicked will remove the first point clicked
-
-            // Adds a marker to the map and push to the array.
-      google.maps.event.addListener(map, 'click', function(event) {
-         addMarker(event.latLng);
-      });
-      function addMarker(location) {
-        if (!window.cheat.createFlag) return;
-        if(marker)
-            marker.setPosition(location);
-        else
-            marker = new google.maps.Marker({
-                position: location,
-                flat: false,
-                map: map,
-                draggable: true
+    //User can add marker to a map by clicking on the map. The next point clicked will remove the first point clicked
+    google.maps.event.addListener(map, 'click', function(event) {
+       addMarker(event.latLng, map);
+    });
+    function addMarker(location, map) {
+      var lat = location.lat();
+      var lng = location.lng();
+      location = {lat:lat, lng:lng};
+      if (!window.cheat.createFlag) return; // only allow marker creation/movement when in "create mode"
+      if(markerForNew) {
+          markerForNew.setPosition(location);
+      } else {
+        markerForNew = new google.maps.Marker({
+          position: location,
+          flat: false,
+          map: map,
+          draggable: true
         });
       }
     }
 
 
-// $(() => {
-//       var map, infoWindow;
-//       initMap = function (){
-//         map = new google.maps.Map(document.getElementById('map'), {
-//           center: {lat: -34.397, lng: 150.644},
-//           zoom: 14
-//         });
-//         infoWindow = new google.maps.InfoWindow;
+    window.map = map;     // totally unacceptable debugging hack, fixme
+    let totallyFakeMarkerData = [
+      {
+        lat: 49.2826,
+        lng: -123.0,
+        name: 'So Fake',
+        description: 'honestly I can see the pixels',
+        img: ''
+      },
+      {
+        lat: 49.3826,
+        lng: -123.0,
+        name: 'Real Things',
+        description: 'my heart is filled with regret',
+        img: ''
+      },
+      {
+        lat: 49.2826,
+        lng: -123.2,
+        name: 'Place',
+        description: 'words about a place',
+        img: ''
+      },
+    ];
+    renderMarkers(totallyFakeMarkerData, map);
 
-      // Sets the map on all markers in the array.
-      function setMapOnAll(map) {
-          marker.setMap(map);
-      }
 
-      // Removes the markers from the map, but keeps them in the array.
-      function clearMarkers() {
-       marker.setMap(null);
-      }
 
-      // Shows any markers currently in the array.
-      function showMarkers() {
-       marker.setMap(map);
-      }
+    // // Sets the map on all markers in the array.
+    // function setMapOnAll(map) {
+    //     marker.setMap(map);
+    // }
 
-      // Deletes all markers in the array by removing references to them.
-      function deleteMarkers() {
-       clearMarkers();
-      }
+    // // Removes the markers from the map, but keeps them in the array.
+    // function clearMarkers() {
+    //  marker.setMap(null);
+    // }
+
+    // // Shows any markers currently in the array.
+    // function showMarkers() {
+    //  marker.setMap(map);
+    // }
+
+    // // Deletes all markers in the array by removing references to them.
+    // function deleteMarkers() {
+    //  clearMarkers();
+    // }
+
   });
 }

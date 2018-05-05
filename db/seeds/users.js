@@ -1,10 +1,44 @@
+// Add data to tables
 exports.seed = function(knex, Promise) {
-  return knex('users').del()
-    .then(function () {
-      return Promise.all([
-        knex('users').insert({id: 1, name: 'Alice'}),
-        knex('users').insert({id: 2, name: 'Bob'}),
-        knex('users').insert({id: 3, name: 'Charlie'})
-      ]);
+  const deleteContributionsPlacesFavorites = Promise.all([
+      knex('favorites').del(),
+      knex('places').del(),
+      knex('contributions').del()
+    ]);
+  const deleteMaps = deleteContributionsPlacesFavorites
+    .then(() => {
+      return knex('maps').del();
     });
+  const deleteUsers = deleteMaps
+    .then(() => {
+      return knex('users').del();
+    });
+
+  const createUsers = deleteUsers
+    .then(() => {
+      return knex('users')
+        .returning('*')
+        .insert([{name: 'Dahlia', email: 'dahlia@dahlia.com'}, {name: 'Mel', email: 'mel@mel.com'}])
+        .then((users) => {
+          console.log(users);
+          const dahlia = users[0];
+          const mel = users[1];
+          console.log('users[0]', users);
+          return knex('maps')
+            .returning('*')
+            .insert([{name: 'Cambie Cofee Shopes', latitude: 65.2345, longitude: 43.56743, zoom: 3, user_id: dahlia.id}, {name: 'Gastowm Resturants', latitude: 25.2345, longitude: 15.56743, zoom: 4, user_id: dahlia.id}, {name: 'Vancouver malls', latitude: 12.3456, longitude: 87.2345, zoom: 5, user_id: mel.id}, {name: 'Vancouvers Cinemas', latitude: 29.83221, longitude: 23.7897, zoom: 6, user_id: mel.id}])
+            .then((maps) => {
+              const map1 = maps[0];
+              const map2 = maps[1];
+              const map3 = maps[2];
+              const map4 = maps[3];
+              console.log(maps);
+              console.log('map[0]', maps);
+              return knex('contributions')
+                .insert([{map_id: map1.id, user_id: map1.user_id}, {map_id: map2.id, user_id: map2.user_id}, {map_id: map3.id, user_id: map3.user_id}, {map_id: map4.id, user_id: map4.user_id}])
+            .returning('*')
+          })
+        })
+    });
+  return createUsers;
 };

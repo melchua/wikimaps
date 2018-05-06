@@ -36,12 +36,17 @@ module.exports = (mapActions) => {
       description: req.body.description,
       img: req.body.img,
       lat: req.body.lat,
-      lng: req.body.lng
+      lng: req.body.lng,
+      // map_id: req.body.map_id
     };
 
     mapActions.createPlace(newPlace);
-      // .then(());
+    // console.log("post ajax", newPlace.map_id);
+    res.send('1');
 
   });
+
+
+
   return router;
 };

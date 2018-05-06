@@ -17,9 +17,10 @@ $(() => {
 //}, function() {
 //  alert( "Second handler for .toggle() called." );
 //});
+
 $(document).ready(function(){
   if (!window.cheat) {window.cheat = {};}
-
+  $(".bottom").hide();
 
   $(".profile").hide();
   $(".favorites_list").hide();
@@ -48,6 +49,15 @@ $(document).ready(function(){
 
   $(".createButton").click(function(){
     window.cheat.createFlag = !window.cheat.createFlag;
+    $(".createButton").toggle();
+    $("#openbtn").toggle();
+    $("#closebtn").toggle();
+    $(".sidenav").toggle();
+    $(".bottom").toggle();
+
+
+
+
     // sessionStorage.getItem('createFlag') === 'active' ?
     //   sessionStorage.setItem('createFlag', 'inactive') :
     //   sessionStorage.setItem('createFlag', 'active');

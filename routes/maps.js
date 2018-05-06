@@ -42,7 +42,7 @@ module.exports = (mapActions) => {
         });
     });
   router.post("/places", (req, res) => {
-    console.log('maps post success');
+    // console.log('maps post success');
 
     const newPlace = {
       name: req.body.name,
@@ -53,9 +53,12 @@ module.exports = (mapActions) => {
       // map_id: req.body.map_id
     };
 
-    mapActions.createPlace(newPlace);
+    mapActions.createPlace(newPlace)
+      .then((place) => {
+        res.json(place);
+      });
     // console.log("post ajax", newPlace.map_id);
-    res.send('1');
+    // res.send('1');
 
   });
 

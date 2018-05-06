@@ -20,10 +20,10 @@ exports.seed = function(knex, Promise) {
         .returning('*')
         .insert([{name: 'Dahlia', email: 'dahlia@dahlia.com'}, {name: 'Mel', email: 'mel@mel.com'}])
         .then((users) => {
-          console.log(users);
+          // console.log(users);
           const dahlia = users[0];
           const mel = users[1];
-          console.log('users[0]', users);
+          // console.log('users[0]', users);
           return knex('maps')
             .returning('*')
             .insert([
@@ -36,7 +36,7 @@ exports.seed = function(knex, Promise) {
               const map2 = maps[1];
               const map3 = maps[2];
               const map4 = maps[3];
-              console.log(maps);
+              // console.log(maps);
               console.log('map[0]', maps);
               return knex('contributions')
                 .insert([{map_id: map1.id, user_id: map1.user_id}, {map_id: map2.id, user_id: map2.user_id}, {map_id: map3.id, user_id: map3.user_id}, {map_id: map4.id, user_id: map4.user_id}])

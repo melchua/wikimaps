@@ -316,12 +316,39 @@ function initMap() {
         console.log("Err:", err);
     }
 
+    });
+  });
+
+    $('.saveMapBtn').click(function(){
+
+      var savedTitle = escape(document.getElementById('mapTitle').value);
+      var saveMapTitle = {
+        name: savedTitle
+      };
+      console.log("FIRST TITLE" , saveMapTitle);
+
+
+
+    $.ajax({
+      url: "/maps/chris",
+      method: "POST",
+      data: saveMapTitle,
+      // dataType: "json",
+      success: (data) => {
+        // data = JSON.parse(data);
+        console.log('success in mapAjax', data);
+      },
+      error: (err) => {
+        console.log("Err:", err);
+    }
+
   });
 
 
+    });
 
 
-  });
+
 // Original code
     //User can add marker to a map by clicking on the map. The next point clicked will remove the first point clicked
     // google.maps.event.addListener(map, 'click', function(event) {

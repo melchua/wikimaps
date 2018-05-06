@@ -65,6 +65,20 @@ module.exports = (mapActions) => {
   });
 
 
+  router.post("/chris", (req, res) => {
+    console.log('TITLE post success');
+
+    const newMapTitle = {
+      name: req.body.name
+    };
+
+    var mapId = mapActions.createMap(newMapTitle);
+    console.log("CHECK TITLE" , newMapTitle.name);
+    res.send(mapId);
+
+  });
+
+
 
 
   return router;

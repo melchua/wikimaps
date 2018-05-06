@@ -52,9 +52,6 @@ function saveData(marker) {
 }
 
 function getAndRenderMarkers(mapId) {
-  // var data = {
-  //   mapId: mapId
-  // };
   console.log("map id",mapId);
   var url = "/maps/"+mapKey + '/places';
   console.log('URL ' ,url);

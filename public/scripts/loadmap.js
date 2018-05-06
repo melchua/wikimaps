@@ -20,7 +20,8 @@ function saveData(marker) {
       description: description,
       img: img,
       lat: lat,
-      lng: lng
+      lng: lng,
+
     };
     // var data = {
     //   name: "rohit",
@@ -125,6 +126,7 @@ function renderSingleRichMarker(markerData, map) {
 function initMap() {
   $(function(){
 
+
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 50, lng: -123},
       zoom: 13,
@@ -203,9 +205,9 @@ function initMap() {
           lng: position.coords.longitude
         };
 
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
-        infoWindow.open(map);
+        // infoWindow.setPosition(pos);
+        // infoWindow.setContent('Location found.');
+        // infoWindow.open(map);
         map.setCenter(pos);
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -256,6 +258,7 @@ function initMap() {
         });
 
         let infoContent = `
+        <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
         <div class='savedMarkerInfo'>
           <table>
             <tr><td>Name:</td> <td><input type='text' id='name' placeholder='Place name'/></td> </tr>
@@ -281,10 +284,44 @@ function initMap() {
       }
 
     }
+  $('.createButton').click(function(){
+    console.log(map.getCenter().lng());
+    console.log(map.getCenter().lat());
+    console.log(map.getZoom());
+
+    // var savedMap = new google.maps.Map(document.getElementById('map'), {
+    //   center: {lat: map.getCenter().lat(), lng: map.getCenter().lng()},
+    //   zoom: map.getZoom(),
+    //   mapTypeId: 'roadmap'
+    // });
+
+    var savedMap = {
+      name: "name",
+      lat: map.getCenter().lat(),
+      lng: map.getCenter().lng(),
+      zoom: map.getZoom()
+    };
+    console.log('saved map', savedMap);
+
+    $.ajax({
+      url: "/maps/map",
+      method: "POST",
+      data: savedMap,
+      // dataType: "json",
+      success: (data) => {
+        // data = JSON.parse(data);
+        console.log('success in mapAjax', data);
+      },
+      error: (err) => {
+        console.log("Err:", err);
+    }
+
+  });
 
 
 
 
+  });
 // Original code
     //User can add marker to a map by clicking on the map. The next point clicked will remove the first point clicked
     // google.maps.event.addListener(map, 'click', function(event) {

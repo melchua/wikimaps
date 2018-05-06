@@ -57,7 +57,6 @@ $(document).ready(function(){
 
 
 
-
     // sessionStorage.getItem('createFlag') === 'active' ?
     //   sessionStorage.setItem('createFlag', 'inactive') :
     //   sessionStorage.setItem('createFlag', 'active');

@@ -1,0 +1,14 @@
+.maps_list
+{
+  padding: 10px 0px 10px 28px;
+  margin: 0;
+  ol
+  {
+    margin: 0;
+    li.mapTitle
+    {
+      color: $highlight-secondary-color;
+      font-size: 1.3em;
+    }
+  }
+}

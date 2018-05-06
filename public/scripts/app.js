@@ -25,7 +25,7 @@ $(document).ready(function(){
   $(".profile").hide();
   $(".favorites_list").hide();
   $(".contributed").hide();
-  $(".maps").hide();
+  $(".maps_list").hide();
 
 
 
@@ -44,7 +44,7 @@ $(document).ready(function(){
 
 
   $('.mapsButton').on('click', function(){
-    $('.maps').toggle();
+    $('.maps_list').toggle();
   });
 
   $(".createButton").click(function(){
@@ -61,4 +61,6 @@ $(document).ready(function(){
     //   sessionStorage.setItem('createFlag', 'inactive') :
     //   sessionStorage.setItem('createFlag', 'active');
   });
+
+
 });

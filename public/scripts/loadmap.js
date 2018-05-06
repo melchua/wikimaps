@@ -6,7 +6,7 @@ $('document').ready(function(e){
 });
 
 function saveData(marker) {
-  $('.savedMarkerInfo').on('click', '.savebutton', function(e){
+  // $('.savedMarkerInfo').on('click', '.savebutton', function(e){
     var name = escape(document.getElementById('name').value);
     var description = escape(document.getElementById('description').value);
     var img = document.getElementById('image').value;
@@ -41,7 +41,7 @@ function saveData(marker) {
         // data = JSON.parse(data);
         console.log('success in ajax', data);
 
-        getAndRenderMarkers(data);     // TODO: is "data.markers" correct? what is correct?  who is bear?
+        getAndRenderMarkers(data.map_id);     // TODO: is "data.markers" correct? what is correct?  who is bear?
       },
       error: (err) => {
         console.log("Err:", err);
@@ -49,7 +49,7 @@ function saveData(marker) {
 
   });
 
-});
+// });
 
   // console.log(name,description,img,latlng);
 }
@@ -258,7 +258,6 @@ function initMap() {
         });
 
         let infoContent = `
-        <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
         <div class='savedMarkerInfo'>
           <table>
             <tr><td>Name:</td> <td><input type='text' id='name' placeholder='Place name'/></td> </tr>

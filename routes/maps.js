@@ -29,7 +29,7 @@ module.exports = (mapActions) => {
 
 
   router.post("/places", (req, res) => {
-    console.log('maps post success');
+    // console.log('maps post success');
 
     const newPlace = {
       name: req.body.name,

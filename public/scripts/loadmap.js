@@ -9,10 +9,16 @@ $('document').ready(function(e){
 });
 
 function saveData(marker) {
+<<<<<<< HEAD
   var $infoBox = $('.savedMarkerInfo');
   $('.savedMarkerInfo').on('click', '.savebutton', function(e){
     var name = document.getElementById('name').value;
     var description = document.getElementById('description').value;
+=======
+  // $('.savedMarkerInfo').on('click', '.savebutton', function(e){
+    var name = escape(document.getElementById('name').value);
+    var description = escape(document.getElementById('description').value);
+>>>>>>> feature/saveMap
     var img = document.getElementById('image').value;
     var latlng = marker.getPosition();
     var lat = latlng.lat();
@@ -36,10 +42,14 @@ function saveData(marker) {
       data: savedMarker,
       success: (data) => {
         console.log('success in ajax', data);
+
         marker.infowindow.close();
         // messagewindow.open(map, marker);
         $infoBox.get(0).reset();
-        getAndRenderMarkers(data);     // TODO: is "data.markers" correct? what is correct?  who is bear?
+            // TODO: is "data.markers" correct? what is correct?  who is bear?
+
+
+        getAndRenderMarkers(data.map_id);     // TODO: is "data.markers" correct? what is correct?  who is bear?
       },
       error: (err) => {
         console.log("Err:", err);
@@ -47,7 +57,7 @@ function saveData(marker) {
 
   });
 
-});
+// });
 
 }
 
@@ -263,8 +273,10 @@ function initMap() {
         });
 
         let infoContent = `
-        <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
         <form class='savedMarkerInfo'>
+
+        <div class='savedMarkerInfo'>
           <table>
             <tr><td>Name:</td> <td><input type='text' id='name' placeholder='Place name'/></td> </tr>
             <tr><td>Description:</td> <td><input type='text' id='description' placeholder='Enter desc'/></td> </tr>

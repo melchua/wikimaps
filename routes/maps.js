@@ -37,7 +37,7 @@ module.exports = (mapActions) => {
       img: req.body.img,
       lat: req.body.lat,
       lng: req.body.lng,
-      // map_id: req.body.map_id
+      map_id: req.body.map_id
     };
 
     mapActions.createPlace(newPlace)
@@ -52,7 +52,7 @@ module.exports = (mapActions) => {
 
 
   router.post("/map", (req, res) => {
-    console.log('id post success');
+    console.log('creat map post success');
 
     const newMap = {
       name: req.body.name,
@@ -60,13 +60,16 @@ module.exports = (mapActions) => {
       lng: req.body.lng,
       zoom: req.body.zoom
     };
-
-    var mapId = mapActions.createMap(newMap);
-    console.log("post mapid", mapId);
-    res.send(mapId);
-
+    let user_id = 1;
+    // var mapId = mapActions.createMap(newMap);
+    // console.log("post mapid", mapId);
+    // res.send(mapId);
+    mapActions.createMap(newMap,user_id)
+      .then((mapId) => {
+        console.log("post mapid", mapId);
+        res.send(mapId);
+      });
   });
-
 
   router.post("/chris", (req, res) => {
     console.log('TITLE post success');
@@ -75,7 +78,7 @@ module.exports = (mapActions) => {
       name: req.body.name
     };
 
-    var mapId = mapActions.createMap(newMapTitle);
+    var mapId = mapActions.addMapTitle(newMapTitle);
     console.log("CHECK TITLE" , newMapTitle.name);
     res.send(mapId);
 

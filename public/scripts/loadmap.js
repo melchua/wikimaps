@@ -7,58 +7,12 @@ $('document').ready(function(e){
   // getAndRenderMarkers(1);
 });
 
-// function saveMap(map) {
-//   $('.createButton').on('click', function(e){
-//     // var name = escape(document.getElementById('name').value);
-//     // var description = escape(document.getElementById('description').value);
-//     // var img = document.getElementById('image').value;
-//     var latlng = map.getPosition();
-
-//     var lat = latlng.lat();
-//     var lng = latlng.lng();
-
-//     var savedMap = {
-//       name: "",
-//       lat: lat,
-//       lng: lng,
-//       zoom:
-//     };
-//     // var data = {
-//     //   name: "rohit",
-//     // };
-//     // console.log(data);
-//     // console.log('saved marker', savedMarker);
-
-//     // Ajax call
-//     $.ajax({
-//       url: "/maps/places",
-//       method: "POST",
-//       data: savedMarker,
-//       // dataType: "json",
-//       success: (data) => {
-//         // data = JSON.parse(data);
-//         console.log('success in post ajax', data);
-//         getAndRenderMarkers(data);     // TODO: is "data.markers" correct? what is correct?  who is bear?
-//       },
-//       error: (err) => {
-//         console.log("Err:", err);
-//       }
-//     });
-// //        infowindow.close();
-//   });
-//   // console.log(name,description,img,latlng);
-// }
-
 function saveData(marker) {
 //<<<<<<< HEAD
   var $infoBox = $('.savedMarkerInfo');
   $('.savedMarkerInfo').on('click', '.savebutton', function(e){
     var name = document.getElementById('name').value;
     var description = document.getElementById('description').value;
-//// conflict
-  // $('.savedMarkerInfo').on('click', '.savebutton', function(e){
-    // var name = escape(document.getElementById('name').value);
-    // var description = escape(document.getElementById('description').value);
     var img = document.getElementById('image').value;
     var latlng = marker.getPosition();
     var lat = latlng.lat();
@@ -70,6 +24,7 @@ function saveData(marker) {
       img: img,
       lat: lat,
       lng: lng,
+      map_id: 1
     };
 
     console.log('saved marker', savedMarker);
@@ -93,7 +48,7 @@ function saveData(marker) {
 
       },
       error: (err) => {
-        console.log("Err:", err);
+        console.log("Err in calling post place:", err);
       }
     });
 //        infowindow.close();
@@ -352,9 +307,9 @@ function initMap() {
 
     }
   $('.createButton').click(function(){
-    console.log(map.getCenter().lng());
-    console.log(map.getCenter().lat());
-    console.log(map.getZoom());
+    // console.log(map.getCenter().lng());
+    // console.log(map.getCenter().lat());
+    // console.log(map.getZoom());
 
     // var savedMap = new google.maps.Map(document.getElementById('map'), {
     //   center: {lat: map.getCenter().lat(), lng: map.getCenter().lng()},

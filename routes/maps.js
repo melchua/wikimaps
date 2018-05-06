@@ -48,5 +48,24 @@ module.exports = (mapActions) => {
 
 
 
+  router.post("/map", (req, res) => {
+    console.log('id post success');
+
+    const newMap = {
+      name: req.body.name,
+      lat: req.body.lat,
+      lng: req.body.lng,
+      zoom: req.body.zoom
+    };
+
+    var mapId = mapActions.createMap(newMap);
+    console.log("post mapid", mapId);
+    res.send(mapId);
+
+  });
+
+
+
+
   return router;
 };

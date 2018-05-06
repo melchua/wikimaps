@@ -26,7 +26,11 @@ exports.seed = function(knex, Promise) {
           console.log('users[0]', users);
           return knex('maps')
             .returning('*')
-            .insert([{name: 'Cambie Cofee Shopes', latitude: 65.2345, longitude: 43.56743, zoom: 3, user_id: dahlia.id}, {name: 'Gastowm Resturants', latitude: 25.2345, longitude: 15.56743, zoom: 4, user_id: dahlia.id}, {name: 'Vancouver malls', latitude: 12.3456, longitude: 87.2345, zoom: 5, user_id: mel.id}, {name: 'Vancouvers Cinemas', latitude: 29.83221, longitude: 23.7897, zoom: 6, user_id: mel.id}])
+            .insert([
+              {name: 'Cambie Cofee Shopes', latitude: 65.2345, longitude: 43.56743, zoom: 3, user_id: dahlia.id, map_key: 'A123456Z'},
+              {name: 'Gastowm Resturants', latitude: 25.2345, longitude: 15.56743, zoom: 4, user_id: dahlia.id, map_key: 'B123456Y'},
+              {name: 'Vancouver malls', latitude: 12.3456, longitude: 87.2345, zoom: 5, user_id: mel.id, map_key: 'C123456X'},
+              {name: 'Vancouvers Cinemas', latitude: 29.83221, longitude: 23.7897, zoom: 6, user_id: mel.id, map_key: 'D123456W'}])
             .then((maps) => {
               const map1 = maps[0];
               const map2 = maps[1];

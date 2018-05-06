@@ -14,6 +14,8 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
+const cookieSession = require('cookie-session');
+
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 // const mapsRoutes = require("./routes/maps");
@@ -25,6 +27,9 @@ app.use(morgan('dev'));
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
+app.use(cookieSession({
+  secret: 'I sing Moana tunes in the shower'
+}));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,13 +40,43 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+
+function getRandomString(){
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
+  const alphabet = letters + letters.toUpperCase() + '0123456789';
+  let output = '';
+  for(var i = 0; i < 8; i += 1){
+    output += alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+  return output;
+}
+const userActions = require('./lib/services/user_actions')(knex);
 const mapActions = require('./lib/services/map_actions')(knex);
+
+app.use((req, res, next) => {
+  console.log('Session', req.session);
+  userActions.findUserById(req.session.userId)
+    .then((user) => {
+      res.locals.user = user;
+      console.log('User', user);
+      next();
+    });
+});
+
 // Mount all resource routes
 app.use("/users", usersRoutes(knex));
 app.use('/maps', require('./routes/maps')(mapActions))
 // Home page
-app.get("/", (req, res) => {
-  res.render("index");
+
+app.get('/backdoor/:user_id', (req, res) => {
+  req.session.userId = Number(req.params.user_id) || 0;
+  res.redirect('/');
+});
+app.get('/', (req, res) => {
+  res.redirect('/' + getRandomString());
+});
+app.get("/:map_key", (req, res) => {
+  res.render("index", {mapKey: req.params.map_key});
 });
 
 app.listen(PORT, () => {

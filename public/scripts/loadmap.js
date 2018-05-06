@@ -31,7 +31,7 @@ function saveData(marker) {
     // Ajax call
     $.ajax({
 
-      url: "/maps/places",
+      url: "/maps/" + mapKey + "/places",
       method: "POST",
       data: savedMarker,
       success: (data) => {
@@ -39,7 +39,7 @@ function saveData(marker) {
         marker.infowindow.close();
         // messagewindow.open(map, marker);
         $infoBox.get(0).reset();
-        getAndRenderMarkers(data);     // TODO: is "data.markers" correct? what is correct?  who is bear?
+        getAndRenderMarkers(mapKey);     // TODO: is "data.markers" correct? what is correct?  who is bear?
       },
       error: (err) => {
         console.log("Err:", err);
@@ -56,7 +56,7 @@ function getAndRenderMarkers(mapId) {
   //   mapId: mapId
   // };
   console.log("map id",mapId);
-  var url = "/maps/"+mapId;
+  var url = "/maps/"+mapKey + '/places';
   console.log('URL ' ,url);
 
   $.ajax({
@@ -78,15 +78,12 @@ function renderMarkers(markers, map) {
         // Clear out the old markers.
 
   console.log('PRIHTING MARKERS: ',markers);
-  for (var i = 0; i < markers.length; i++)
-  {
-    markers[i].setMap(null);
-  }
+
   // markers.forEach(function(marker) {
   //   marker.setMap(null);
   // });
 
-  for (let marker of markers.data) {
+  for (let marker of markers) {
     console.log('rendering markers: ',marker);
     renderSingleRichMarker(marker, map);
 
@@ -137,7 +134,7 @@ function initMap() {
       mapTypeId: 'roadmap'
     });
 
-
+    getAndRenderMarkers(mapKey);
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -251,7 +248,6 @@ function initMap() {
       // var lat = location.lat();
       // var lng = location.lng();
       // location = {lat:lat, lng:lng};
-      if (!window.cheat.createFlag) return; // only allow marker creation/movement when in "create mode"
       if(markerForNew) {
           markerForNew.setPosition(location);
       } else {

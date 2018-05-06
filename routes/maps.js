@@ -27,7 +27,20 @@ module.exports = (mapActions) => {
     //   });
 
 
-
+  router.route('/:key/places')
+    .get((req, res) => {
+      mapActions.getPlacesByMapKey(req.params.key)
+        .then((places) => {
+          res.json(places);
+        });
+    })
+    .post((req, res) => {
+      console.log(req.body);
+      mapActions.createPlaceWithMapKey(req.params.key, res.locals.user.id, req.body)
+        .then((place) => {
+          res.status(201).json(place);
+        });
+    });
   router.post("/places", (req, res) => {
     console.log('maps post success');
 

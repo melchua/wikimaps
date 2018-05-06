@@ -129,9 +129,9 @@ function renderMarkers(markers, map) {
   // });
 
 // <<<<<<< HEAD left here in case wrong
-//   for (let marker of markers) {
+  for (let marker of markers) {
 //     console.log('rendering markers: ',marker);
-  for (let marker of markers.data) {
+  // for (let marker of markers.data) {
     renderSingleRichMarker(marker, map);
   }
 }

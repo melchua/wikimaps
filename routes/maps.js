@@ -68,7 +68,8 @@ module.exports = (mapActions) => {
       name: req.body.name,
       lat: req.body.lat,
       lng: req.body.lng,
-      zoom: req.body.zoom
+      zoom: req.body.zoom,
+      user_id: req.session.id
     };
 
     var mapId = mapActions.createMap(newMap);
@@ -78,16 +79,13 @@ module.exports = (mapActions) => {
   });
 
 
-  router.post("/chris", (req, res) => {
-    console.log('TITLE post success');
-
-    const newMapTitle = {
-      name: req.body.name
-    };
-
-    var mapId = mapActions.createMap(newMapTitle);
-    console.log("CHECK TITLE" , newMapTitle.name);
-    res.send(mapId);
+  router.post("/:key", (req, res) => {
+    console.log('Adding map title post');
+    console.log('these are the things: ', req.body.name, req.params.key, req.body.latitude, req.body.longitude, req.body.zoom)
+    mapActions.addMapTitle(req.body.name, req.params.key, req.body.latitude, req.body.longitude, req.body.zoom)
+      .then((map) => {
+        res.status(201);
+      });
 
   });
 

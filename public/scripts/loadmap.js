@@ -282,59 +282,67 @@ function initMap() {
       }
 
     }
-  $('.createButton').click(function(){
-    console.log(map.getCenter().lng());
-    console.log(map.getCenter().lat());
-    console.log(map.getZoom());
+  // $('.createButton').click(function(){
+  //   console.log(map.getCenter().lng());
+  //   console.log(map.getCenter().lat());
+  //   console.log(map.getZoom());
 
-    // var savedMap = new google.maps.Map(document.getElementById('map'), {
-    //   center: {lat: map.getCenter().lat(), lng: map.getCenter().lng()},
-    //   zoom: map.getZoom(),
-    //   mapTypeId: 'roadmap'
-    // });
+  //   // var savedMap = new google.maps.Map(document.getElementById('map'), {
+  //   //   center: {lat: map.getCenter().lat(), lng: map.getCenter().lng()},
+  //   //   zoom: map.getZoom(),
+  //   //   mapTypeId: 'roadmap'
+  //   // });
+
+  //   var savedMap = {
+  //     name: "name",
+  //     lat: map.getCenter().lat(),
+  //     lng: map.getCenter().lng(),
+  //     zoom: map.getZoom()
+  //   };
+  //   console.log('saved map', savedMap);
+
+  //   $.ajax({
+  //     url: "/maps/map",
+  //     method: "POST",
+  //     data: savedMap,
+  //     // dataType: "json",
+  //     success: (data) => {
+  //       // data = JSON.parse(data);
+  //       console.log('success in mapAjax', data);
+  //     },
+  //     error: (err) => {
+  //       console.log("Err:", err);
+  //   }
+
+  //   });
+  // });
+
+    $('.saveMapBtn').click(function(){
+
+    var savedTitle = document.getElementById('mapTitle').value;
+
+
 
     var savedMap = {
-      name: "name",
-      lat: map.getCenter().lat(),
-      lng: map.getCenter().lng(),
+      name: savedTitle,
+      latitude: map.getCenter().lat(),
+      longitude: map.getCenter().lng(),
       zoom: map.getZoom()
     };
-    console.log('saved map', savedMap);
+
+
+    console.log("saved Map printout: ", savedMap);
+
 
     $.ajax({
-      url: "/maps/map",
+      url: "/maps/" + mapKey,
       method: "POST",
       data: savedMap,
       // dataType: "json",
       success: (data) => {
         // data = JSON.parse(data);
         console.log('success in mapAjax', data);
-      },
-      error: (err) => {
-        console.log("Err:", err);
-    }
-
-    });
-  });
-
-    $('.saveMapBtn').click(function(){
-
-      var savedTitle = escape(document.getElementById('mapTitle').value);
-      var saveMapTitle = {
-        name: savedTitle
-      };
-      console.log("FIRST TITLE" , saveMapTitle);
-
-
-
-    $.ajax({
-      url: "/maps/chris",
-      method: "POST",
-      data: saveMapTitle,
-      // dataType: "json",
-      success: (data) => {
-        // data = JSON.parse(data);
-        console.log('success in mapAjax', data);
+        res.redirect('/');
       },
       error: (err) => {
         console.log("Err:", err);

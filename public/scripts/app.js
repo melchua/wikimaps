@@ -20,7 +20,7 @@ $(() => {
 
 $(document).ready(function(){
   if (!window.cheat) {window.cheat = {};}
-  $(".bottom").hide();
+  // $(".bottom").hide();
 
   $(".profile").hide();
   $(".favorites_list").hide();

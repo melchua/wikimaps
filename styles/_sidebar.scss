@@ -52,22 +52,7 @@
     z-index: 2;
 }
 
-.addPointButton {
- color: #818181;
- background-color: black;
- /*width: 40%;*/
- position: relative;
- margin: 0.5em;
- opacity: 0.87;
- border-width: 0.1em;
- border-radius: 0.5em;
- padding: 0.5em 1em 0.5em 1em;
-}
 
-.addPointButton:hover {
-  color: #f1f1f1;
-
-}
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}

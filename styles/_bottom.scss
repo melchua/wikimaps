@@ -1,16 +1,4 @@
-.createButton {
-  bottom: 0;
-  position: absolute;
-  z-index: 2;
-  color: #818181;
-  background-color: black;
-  /*width: 40%;*/
-  margin: 2em;
-  opacity: 0.87;
-  border-width: 0.1em;
-  border-radius: 0.5em;
-  padding: 0.5em 1em 0.5em 1em;
-}
+
 
 section.bottom{
   z-index: 2;
@@ -19,6 +7,7 @@ section.bottom{
   position: absolute;
   bottom: 0;
   padding: 1em;
+  width: 50%;
 
   .title {
    color: #818181;

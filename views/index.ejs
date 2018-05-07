@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
@@ -22,7 +22,74 @@
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/profile.js"></script>
 
-    <style>
+<style>
+     /* Always set the map height explicitly to define the size of the div
+      * element that contains the map. */
+     #map {
+       height: 100%;
+       z-index: 0;
+       position: fixed;
+
+
+     }
+     /* Optional: Makes the sample page fill the window. */
+     html, body {
+       height: 100%;
+       margin: 0;
+       padding: 0;
+     }
+
+
+     .sidehead {
+       font-size: 30px;
+     }
+
+     /*CSS Styling for the favorites button*/
+     label {
+       /* Presentation */
+       font-size: 48px
+     }
+
+     /* Required Styling */
+
+     label input[type="checkbox"] {
+       display: none;
+     }
+
+     .custom-checkbox {
+       margin-left: 2em;
+       position: relative;
+       cursor: pointer;
+     }
+
+     .custom-checkbox .glyphicon {
+       color: gold;
+       position: absolute;
+       top: 0.4em;
+       left: -1.25em;
+       font-size: 0.75em;
+     }
+
+     .custom-checkbox .glyphicon-star-empty {
+       color: gray;
+     }
+
+     .custom-checkbox .glyphicon-star {
+       opacity: 0;
+       transition: opacity 0.2s ease-in-out;
+     }
+
+     .custom-checkbox:hover .glyphicon-star{
+       opacity: 0.5;
+     }
+
+     .custom-checkbox input[type="checkbox"]:checked ~ .glyphicon-star {
+       opacity: 1;
+     }
+
+
+   </style>
+<!--     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -41,7 +108,7 @@
         font-size: 30px;
       }
 
-    </style>
+    </style> -->
 
   </head>
 
@@ -88,8 +155,26 @@
         </ol>
       </section>
 
-
     </div>
+     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+
+     <section class="bottom">
+       <button class="saveMapBtn"> Save Map </button>
+       <textarea class="title" id="mapTitle" name="textarea">Title</textarea>
+       <input type="submit" name="submit" value="Save Point" class="addPointButton"/>
+       <input type="submit" name="submit" value="Delete Point" class="deletePointBtn"/>
+
+     <label for="id-of-input" class="custom-checkbox">
+       <input type="checkbox" id="id-of-input"/>
+       <i class="glyphicon glyphicon-star-empty"></i>
+       <i class="glyphicon glyphicon-star"></i>
+       <span>Fav</span>
+     </label>
+
+     </section>
+     <div id="map">
+     </div>
+<!--     </div>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 
     <section class="bottom">
@@ -101,7 +186,7 @@
     </section>
 
     <div id="map">
-    </div>
+    </div> -->
 
      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVxbpfmC6j5_01ie6kzGZb-znmDRSDf4Y&libraries=places&callback=initMap">
      </script>

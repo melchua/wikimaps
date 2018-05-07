@@ -357,7 +357,22 @@ function initMap() {
 
 
     });
+// Add to favoirites
+  // $('#id-of-input').click(function(){
+  //   console.log("we are in star click");
+  //   $.ajax({
+  //       url: "/maps/" + mapKey + "/favorites",
+  //       method: "POST",
+  //       success: (data) => {
+  //         console.log('success in favorites ajax', data);
 
+  //         //getAndRenderMarkers(mapKey);     // TODO: is "data.markers" correct? what is correct?  who is bear?
+  //       },
+  //       error: (err) => {
+  //         console.log("Err:", err);
+  //       }
+  //     });
+  //   });
 
 /*
  * 5 ways to customize the Google Maps infowindow
@@ -474,6 +489,7 @@ function initialize() {
   });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
+
 // Original code
     //User can add marker to a map by clicking on the map. The next point clicked will remove the first point clicked
     // google.maps.event.addListener(map, 'click', function(event) {

@@ -35,51 +35,52 @@ module.exports = (mapActions) => {
         });
     })
     .post((req, res) => {
-      console.log(req.body);
+      console.log("first call for the post place:", req.body);
       mapActions.createPlaceWithMapKey(req.params.key, res.locals.user.id, req.body)
         .then((place) => {
           res.status(201).json(place);
         });
     });
-  router.post("/places", (req, res) => {
-    // console.log('maps post success');
 
-    const newPlace = {
-      name: req.body.name,
-      description: req.body.description,
-      img: req.body.img,
-      lat: req.body.lat,
-      lng: req.body.lng,
-      // map_id: req.body.map_id
-    };
+  // router.post("/places", (req, res) => {
+  //   // console.log('maps post success');
 
-    mapActions.createPlace(newPlace)
-      .then((place) => {
-        res.json(place);
-      });
-    // console.log("post ajax", newPlace.map_id);
-    // res.send('1');
+  //   const newPlace = {
+  //     name: req.body.name,
+  //     description: req.body.description,
+  //     img: req.body.img,
+  //     lat: req.body.lat,
+  //     lng: req.body.lng,
+  //     // map_id: req.body.map_id
+  //   };
 
-  });
+  //   mapActions.createPlace(newPlace)
+  //     .then((place) => {
+  //       res.json(place);
+  //     });
+  //   // console.log("post ajax", newPlace.map_id);
+  //   // res.send('1');
+
+  // });
 
 
 
-  router.post("/map", (req, res) => {
-    console.log('id post success');
+  // router.post("/map", (req, res) => {
+  //   console.log('id post success');
 
-    const newMap = {
-      name: req.body.name,
-      lat: req.body.lat,
-      lng: req.body.lng,
-      zoom: req.body.zoom,
-      user_id: req.session.id
-    };
+  //   const newMap = {
+  //     name: req.body.name,
+  //     lat: req.body.lat,
+  //     lng: req.body.lng,
+  //     zoom: req.body.zoom,
+  //     user_id: req.session.id
+  //   };
 
-    var mapId = mapActions.createMap(newMap);
-    console.log("post mapid", mapId);
-    res.send(mapId);
+  //   var mapId = mapActions.createMap(newMap);
+  //   console.log("post mapid", mapId);
+  //   res.send(mapId);
 
-  });
+  // });
 
 
   router.post("/:key", (req, res) => {

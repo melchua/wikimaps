@@ -3,10 +3,6 @@ var markerForNew = null;
 var markers = [];
 
 
-// $('document').ready(function(e){
-//   // getAndRenderMarkers(1);
-
-
 function saveData(marker) {
   var $infoBox = $('.savedMarkerInfo');
   $('.savedMarkerInfo').one('click', '.savebutton', function(e){
@@ -25,10 +21,6 @@ function saveData(marker) {
       lng: lng,
     };
 
-    // console.log('saved marker', savedMarker);
-
-    // console.log('Fool me only ONCE?');
-
     // Ajax call
     $.ajax({
       url: "/maps/" + mapKey + "/places",
@@ -38,7 +30,6 @@ function saveData(marker) {
         console.log('success in ajax', data);
 
         marker.infowindow.close();
-        // messagewindow.open(map, marker);
         $infoBox.get(0).reset();
         getAndRenderMarkers(mapKey);     // TODO: is "data.markers" correct? what is correct?  who is bear?
       },
@@ -46,13 +37,8 @@ function saveData(marker) {
         console.log("Err:", err);
       }
     });
-//        infowindow.close();
   });
 }
-
-
-//==);
-
 
 
 function getAndRenderMarkers(mapId) {
@@ -66,7 +52,6 @@ function getAndRenderMarkers(mapId) {
     success: (data) => {
       console.log("we are in get /map/id success");
       console.log(data);
-      // data = JSON.stringify(data);
       renderMarkers(data, map);
     },
     error: (jqXHR, textStatus, errorThrown) => {
@@ -82,6 +67,7 @@ function renderMarkers(markers, map) {
 }
 
 function renderSingleRichMarker(markerData, map) {
+
   var location = new google.maps.LatLng(markerData.latitude,markerData.longitude);
 
   let marker = new google.maps.Marker({
@@ -103,16 +89,49 @@ function renderSingleRichMarker(markerData, map) {
   marker.infowindow = new google.maps.InfoWindow({
     content: infoContent
   });
-
   google.maps.event.addListener(marker, 'click', function() {
     marker.infowindow.open(map, marker);
   });
-
 }
+
+function getMapsList() {
+  var url = "/maps";
+  console.log("starting maps list");
+  $.ajax({
+    url: url,
+    method: "GET",
+    dataType: "json",
+    success: (data) => {
+      console.log("WWWWwe are in get maps list success");
+      console.log(data);
+      renderMaps(data);
+    },
+    error: (jqXHR, textStatus, errorThrown) => {
+      console.log("Err:", textStatus);
+    }
+  });
+}
+
+
+function renderMaps(maps) {
+  $maps_container = $('.maps_list');
+  $maps_container.empty();
+  for (let map of maps) {
+    var $map = createSingleMap(map);
+    $maps_container.append($map);
+  }
+}
+
+function createSingleMap(map) {
+  let mapTitle = `<li class="mapNames">
+                  ${map.name}</li>`;
+  return mapTitle;
+}
+
+getMapsList();
 
 function initMap() {
   $(function(){
-
 
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 50, lng: -123},

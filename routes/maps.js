@@ -19,13 +19,6 @@ module.exports = (mapActions) => {
     });
    });
 
-    // mapActions.getMaps()
-    //   .then((maps) => {
-    //     res.json(maps);
-
-    //   });
-
-
   router.route('/:key/places')
     .get((req, res) => {
       mapActions.getPlacesByMapKey(req.params.key)
@@ -41,8 +34,22 @@ module.exports = (mapActions) => {
         });
     });
 
-  // router.post("/places", (req, res) => {
-  //   // console.log('maps post success');
+  router.post("/places", (req, res) => {
+
+    const newPlace = {
+      name: req.body.name,
+      description: req.body.description,
+      img: req.body.img,
+      lat: req.body.lat,
+      lng: req.body.lng,
+      // map_id: req.body.map_id
+    };
+
+    mapActions.createPlace(newPlace)
+      .then((place) => {
+        res.json(place);
+      });
+  });
 
   //   const newPlace = {
   //     name: req.body.name,
@@ -52,17 +59,6 @@ module.exports = (mapActions) => {
   //     lng: req.body.lng,
   //     // map_id: req.body.map_id
   //   };
-
-  //   mapActions.createPlace(newPlace)
-  //     .then((place) => {
-  //       res.json(place);
-  //     });
-  //   // console.log("post ajax", newPlace.map_id);
-  //   // res.send('1');
-
-  // });
-
-
 
   // router.post("/map", (req, res) => {
   //   console.log('id post success');
@@ -91,9 +87,6 @@ module.exports = (mapActions) => {
       });
 
   });
-
-
-
 
   return router;
 };

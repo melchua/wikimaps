@@ -19,13 +19,6 @@ module.exports = (mapActions) => {
     });
    });
 
-    // mapActions.getMaps()
-    //   .then((maps) => {
-    //     res.json(maps);
-
-    //   });
-
-
   router.route('/:key/places')
     .get((req, res) => {
       mapActions.getPlacesByMapKey(req.params.key)
@@ -41,7 +34,6 @@ module.exports = (mapActions) => {
         });
     });
   router.post("/places", (req, res) => {
-    // console.log('maps post success');
 
     const newPlace = {
       name: req.body.name,
@@ -56,11 +48,7 @@ module.exports = (mapActions) => {
       .then((place) => {
         res.json(place);
       });
-    // console.log("post ajax", newPlace.map_id);
-    // res.send('1');
-
   });
-
 
 
   router.post("/map", (req, res) => {
@@ -90,9 +78,6 @@ module.exports = (mapActions) => {
       });
 
   });
-
-
-
 
   return router;
 };

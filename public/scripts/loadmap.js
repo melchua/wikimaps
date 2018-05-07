@@ -123,8 +123,9 @@ function renderMaps(maps) {
 }
 
 function createSingleMap(map) {
-  let mapTitle = `<li class="mapNames">
-                  ${map.name}</li>`;
+  let mapTitle = `<a href=/${map.map_key} class="mapNames">
+                  ${map.name}</a>`;
+  console.log("map key pleaseee", map.map_key);
   return mapTitle;
 }
 

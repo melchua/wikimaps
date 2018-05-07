@@ -38,7 +38,7 @@ $(document).ready(function(){
   });
 
   $('.contributedButton').on('click', function(){
-    $('.contributed').toggle();
+    $('.contributed_list').toggle();
   });
 
 

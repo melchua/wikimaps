@@ -3,62 +3,15 @@ var markerForNew = null;
 var markers = [];
 
 
-$('document').ready(function(e){
-  // getAndRenderMarkers(1);
-});
+// $('document').ready(function(e){
+//   // getAndRenderMarkers(1);
 
-// function saveMap(map) {
-//   $('.createButton').on('click', function(e){
-//     // var name = escape(document.getElementById('name').value);
-//     // var description = escape(document.getElementById('description').value);
-//     // var img = document.getElementById('image').value;
-//     var latlng = map.getPosition();
-
-//     var lat = latlng.lat();
-//     var lng = latlng.lng();
-
-//     var savedMap = {
-//       name: "",
-//       lat: lat,
-//       lng: lng,
-//       zoom:
-//     };
-//     // var data = {
-//     //   name: "rohit",
-//     // };
-//     // console.log(data);
-//     // console.log('saved marker', savedMarker);
-
-//     // Ajax call
-//     $.ajax({
-//       url: "/maps/places",
-//       method: "POST",
-//       data: savedMarker,
-//       // dataType: "json",
-//       success: (data) => {
-//         // data = JSON.parse(data);
-//         console.log('success in post ajax', data);
-//         getAndRenderMarkers(data);     // TODO: is "data.markers" correct? what is correct?  who is bear?
-//       },
-//       error: (err) => {
-//         console.log("Err:", err);
-//       }
-//     });
-// //        infowindow.close();
-//   });
-//   // console.log(name,description,img,latlng);
-// }
 
 function saveData(marker) {
-//<<<<<<< HEAD
   var $infoBox = $('.savedMarkerInfo');
-  $('.savedMarkerInfo').on('click', '.savebutton', function(e){
+  $('.savedMarkerInfo').one('click', '.savebutton', function(e){
     var name = document.getElementById('name').value;
     var description = document.getElementById('description').value;
-//// conflict
-  // $('.savedMarkerInfo').on('click', '.savebutton', function(e){
-    // var name = escape(document.getElementById('name').value);
-    // var description = escape(document.getElementById('description').value);
     var img = document.getElementById('image').value;
     var latlng = marker.getPosition();
     var lat = latlng.lat();
@@ -72,8 +25,9 @@ function saveData(marker) {
       lng: lng,
     };
 
-    console.log('saved marker', savedMarker);
+    // console.log('saved marker', savedMarker);
 
+    // console.log('Fool me only ONCE?');
 
     // Ajax call
     $.ajax({
@@ -94,10 +48,12 @@ function saveData(marker) {
     });
 //        infowindow.close();
   });
-
-// });
-
 }
+
+
+//==);
+
+
 
 function getAndRenderMarkers(mapId) {
   console.log("map id",mapId);
@@ -120,41 +76,20 @@ function getAndRenderMarkers(mapId) {
 }
 
 function renderMarkers(markers, map) {
-        // Clear out the old markers.
-
-  console.log('PRIHTING MARKERS: ',markers);
-
-  // markers.forEach(function(marker) {
-  //   marker.setMap(null);
-  // });
-
-// <<<<<<< HEAD left here in case wrong
   for (let marker of markers) {
-//     console.log('rendering markers: ',marker);
-  // for (let marker of markers.data) {
     renderSingleRichMarker(marker, map);
   }
 }
 
 function renderSingleRichMarker(markerData, map) {
-
-  // console.log('markerData: ', markerData);
-  // console.log('map: ', map);
-  // put the actual marker on the map
-  // set up infobox
-  // attach infobox to marker's on-click
-  // let location = {lat: markerData.latitude, lng: markerData.longitude};
-
   var location = new google.maps.LatLng(markerData.latitude,markerData.longitude);
 
   let marker = new google.maps.Marker({
     position: location,
     flat: false,
     map: map,
-    draggable: true
+    draggable: false
   });
-
-  console.log('IMAGE: ', markerData.img);
 
   let infoContent = `
     <div class='savedMarkerInfo'>
@@ -317,7 +252,7 @@ function initMap() {
         </form>`;
         //        <tr><td>Name:</td> <td><input type='text' class='name' value='${markerData.name}'/></td> </tr>
         //        <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>
-
+// onclick='saveData(markerForNew)
 
         markerForNew.infowindow = new google.maps.InfoWindow({
           content: infoContent
@@ -326,6 +261,7 @@ function initMap() {
 
         google.maps.event.addListener(markerForNew, 'click', function() {
           markerForNew.infowindow.open(map, markerForNew);
+          // saveData(markerForNew);
         });
 
 

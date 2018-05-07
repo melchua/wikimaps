@@ -126,67 +126,45 @@
     <div id="mySidenav" class="sidenav">
       <span id="closebtn">&times;</span>
 
-      <a class="profileButton" href="#" style="font-size: 30px">Profile</a>
+      <a class="profileButton category" href="#" style="font-size: 30px">Profile</a>
       <section class="profile">
       </section>
 
-      <a class="favouritesButton" href="#" style="font-size: 30px">My Favorites</a>
+      <a class="favouritesButton category" href="#" style="font-size: 30px">My Favorites</a>
       <section class="favorites_list">
         <ol>
-          <li class="favorite">
-            Celebrity sightings
-          </li>
-          <li class="favorite">
-            Must-see dog poop sights
-          </li>
-          <li class="favorite">
-            Hobos sleep here!!
-          </li>
         </ol>
       </section>
 
-      <a class="contributedButton" href="#" style="font-size: 30px">Contributed</a>
+      <a class="contributedButton category" href="#" style="font-size: 30px">Contributed</a>
       <section class="contributed_list">
       </section>
 
-      <a class="mapsButton" href="#" style="font-size: 30px">All Maps</a>
+      <a class="mapsButton category" href="#" style="font-size: 30px">All Maps</a>
       <section class="maps_list">
-        <ol>
+        <ol class="maps_points">
         </ol>
       </section>
 
     </div>
-     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-
-     <section class="bottom">
-       <button class="saveMapBtn"> Save Map </button>
-       <textarea class="title" id="mapTitle" name="textarea">Title</textarea>
-       <input type="submit" name="submit" value="Save Point" class="addPointButton"/>
-       <input type="submit" name="submit" value="Delete Point" class="deletePointBtn"/>
-
-     <label for="id-of-input" class="custom-checkbox">
-       <input type="checkbox" id="id-of-input"/>
-       <i class="glyphicon glyphicon-star-empty"></i>
-       <i class="glyphicon glyphicon-star"></i>
-       <span>Fav</span>
-     </label>
-
-     </section>
-     <div id="map">
-     </div>
-<!--     </div>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 
     <section class="bottom">
-      <button type="button" class="saveMapBtn btn btn btn-info"> Save Map </button>
+      <button type="button" class="saveMapBtn btn btn-info"> Save Map </button>
 
       <form>
         <input type="text" id="mapTitle" name="textarea" class="title" id="formGroupExampleInput" placeholder="Title of Map">
       </form>
+     <label for="id-of-input" class="custom-checkbox">
+       <input type="checkbox" id="id-of-input"/>
+       <i class="glyphicon glyphicon-star-empty"></i>
+       <i class="glyphicon glyphicon-star"></i>
+     </label>
+
     </section>
 
     <div id="map">
-    </div> -->
+    </div>
 
      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVxbpfmC6j5_01ie6kzGZb-znmDRSDf4Y&libraries=places&callback=initMap">
      </script>

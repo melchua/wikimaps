@@ -1,6 +1,6 @@
 .maps_list
 {
-  padding: 10px 0px 10px 28px;
+  padding: 10px 0px 10px 0px;
   margin: 0;
 /*  ol
   {
@@ -8,7 +8,10 @@
 */    a.mapNames
     {
       color: $highlight-secondary-color;
-      font-size: 1.3em;
+      font-size: 1.7em;
+      display: block;
+      transition: 0.3s;
+      padding: 0.5em;
     }
   /*}
 */}

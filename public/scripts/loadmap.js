@@ -114,7 +114,7 @@ function getMapsList() {
 
 
 function renderMaps(maps) {
-  $maps_container = $('.maps_list');
+  $maps_container = $('.maps_points');
   $maps_container.empty();
   for (let map of maps) {
     var $map = createSingleMap(map);
@@ -123,8 +123,8 @@ function renderMaps(maps) {
 }
 
 function createSingleMap(map) {
-  let mapTitle = `<a href=/${map.map_key} class="mapNames">
-                  ${map.name}</a>`;
+  let mapTitle = `<li><a href=/${map.map_key} class="mapNames">
+                  ${map.name}</a></li>`;
   console.log("map key pleaseee", map.map_key);
   return mapTitle;
 }

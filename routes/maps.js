@@ -8,6 +8,7 @@ module.exports = (mapActions) => {
 
   router.get("/", (req, res) => {
     mapActions.getMaps()
+    console.log("THIS IS TEST")
       .then((maps) => {
         res.json(maps);
 
@@ -89,10 +90,34 @@ module.exports = (mapActions) => {
       .then((map) => {
         res.status(201);
       });
-
   });
 
+  router.post("/:key/favorites", (req, res) => {
+    console.log("Adding to favorites");
 
+    mapActions.addMapFavorites(req.params.key, res.locals.user.id)
+      .then((map) => {
+        res.status(201);
+      });
+    });
+
+    router.get("/:key/favorites", (req, res) => {
+    mapActions.getMapFavorites(req.params.id, function(result){
+      res.json({data: result});
+    });
+   });
+
+    router.get("/:key/favorites", (req, res) => {
+   knex
+     .select("*")
+     .from("users")
+     .where({id: res.locals.user.id})
+     .then((results) => {
+       res.json(results);
+   });
+
+
+ });
 
 
   return router;

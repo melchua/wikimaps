@@ -20,10 +20,9 @@ section.bottom{
   bottom: 0;
   padding: 1em;
 
-  .title {
+/*  .title {
    color: #818181;
    background-color: white;
-   /*width: 40%;*/
    margin: 0.5em;
    opacity: 0.87;
    border-width: 0.1em;
@@ -33,10 +32,10 @@ section.bottom{
    float: left;
 
   }
-  .saveMapBtn {
+  */
+ .saveMapBtn {
    color: #818181;
    background-color: black;
-   /*width: 40%;*/
    margin: 0.5em;
    opacity: 0.87;
    border-width: 0.1em;
@@ -76,6 +75,10 @@ section.bottom{
 
   }
   .deletePointBtn:hover{
+  color: #f1f1f1;
+
+  }
+  .saveMapBtn:hover{
   color: #f1f1f1;
 
   }

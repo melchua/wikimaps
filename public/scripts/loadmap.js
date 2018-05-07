@@ -358,8 +358,22 @@ function initMap() {
 
     });
 
+  // $('#id-of-input').click(function(){
+  //   console.log("we are in star click");
+  //   $.ajax({
 
+  //       url: "/maps/" + mapKey + "/favorites",
+  //       method: "POST",
+  //       success: (data) => {
+  //         console.log('success in favorites ajax', data);
 
+  //         //getAndRenderMarkers(mapKey);     // TODO: is "data.markers" correct? what is correct?  who is bear?
+  //       },
+  //       error: (err) => {
+  //         console.log("Err:", err);
+  //       }
+  //     });
+  //   });
 // Original code
     //User can add marker to a map by clicking on the map. The next point clicked will remove the first point clicked
     // google.maps.event.addListener(map, 'click', function(event) {

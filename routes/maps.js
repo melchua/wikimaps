@@ -88,5 +88,15 @@ module.exports = (mapActions) => {
 
   });
 
+  // router.route('/:key/favorites')
+  //   .post((req, res) => {
+  //     console.log("Wer are in favorites post")
+  //     mapActions.addDelFavorites(req.params.key, res.locals.user.id)
+  //       .then((favorite) => {
+  //         res.status(201).json(favorite);
+  //       });
+  //   });
+
+
   return router;
 };
